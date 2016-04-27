@@ -3,11 +3,18 @@
   "version": "1.0.0",
   "description": "Scrape the Google mobile (AMP) carousel",
   "main": "lib/index.js",
-  "files": ["lib"],
+  "files": [
+    "lib"
+  ],
   "scripts": {
     "prepublish": "make"
   },
-  "keywords": ["google", "scraper", "carousel", "amp"],
+  "keywords": [
+    "google",
+    "scraper",
+    "carousel",
+    "amp"
+  ],
   "author": "Matt Brennan <matt@153.io> (http://blog.153.io/)",
   "license": "MIT",
   "devDependencies": {
@@ -29,5 +36,13 @@
     "plugins": [
       "transform-runtime"
     ]
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/quarterto/google-carousel-scraper.git"
+  },
+  "bugs": {
+    "url": "https://github.com/quarterto/google-carousel-scraper/issues"
+  },
+  "homepage": "https://github.com/quarterto/google-carousel-scraper#readme"
 }
