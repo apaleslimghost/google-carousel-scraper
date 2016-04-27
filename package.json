@@ -2,7 +2,7 @@
   "name": "google-carousel-scraper",
   "version": "1.0.0",
   "description": "Scrape the Google mobile (AMP) carousel",
-  "main": "lib/index.js",
+  "main": "index.js",
   "files": [
     "lib"
   ],
