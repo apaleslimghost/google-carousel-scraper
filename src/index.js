@@ -21,5 +21,6 @@ export default async function(searchTerm) {
 		link: link.getAttribute('data-amp'),
 		title: link.lastElementChild.textContent,
 		date: fuzzyDateParse(link.nextSibling.textContent),
+		publisher: link.getAttribute('data-amp-title'),
 	}));
 }
