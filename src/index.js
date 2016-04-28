@@ -17,10 +17,13 @@ export default async function(searchTerm) {
 		console.error(e.stack);
 	}
 
-	return browser.queryAll('[data-ampgroup=true] a[data-amp]').map(link => ({
+	const links = browser.queryAll('[data-ampgroup=true] a[data-amp]').map(link => ({
 		link: link.getAttribute('data-amp'),
 		title: link.lastElementChild.textContent,
 		date: fuzzyDateParse(link.nextSibling.textContent),
 		publisher: link.getAttribute('data-amp-title'),
 	}));
+
+	browser.destroy();
+	return links;
 }
