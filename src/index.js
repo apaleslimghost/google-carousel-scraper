@@ -15,9 +15,7 @@ export default async function(searchTerm) {
 	try {
 		try {
 			await browser.visit(url);
-		} catch(e) {
-			console.error(e.stack);
-		}
+		} catch(e) {} // 🙈
 
 		const links = browser.queryAll('[data-ampgroup=true] a[data-amp]').map(link => ({
 			link: link.getAttribute('data-amp'),
