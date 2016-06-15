@@ -7,15 +7,28 @@ function getSearchUrl(searchTerm) {
 	return `https://www.google.co.uk/search?q=${encodeURIComponent(searchTerm)}`;
 }
 
-export default async function(searchTerm) {
+export default async function(searchTerm, options = {timeout: 15000}) {
 	const url = getSearchUrl(searchTerm);
 	Browser.waitDuration = 999999;
 	const browser = new Browser({userAgent: IPHONE_AGENT});
+	let timeout;
+	const timeoutPromise = new Promise((resolve, reject) => {
+		const err = new Error(`Search '${searchTerm}' timed out`);
+		err.timeout = true;
+		timeout = setTimeout(reject, options.timeout, err);
+	});
 
 	try {
 		try {
-			await browser.visit(url);
-		} catch(e) {} // 🙈
+			await Promise.race([
+				browser.visit(url),
+				timeoutPromise,
+			]);
+		} catch(e) {
+			if(e.timeout) {
+				throw e;
+			}
+		} // 🙈
 
 		const links = browser.queryAll('[data-ampgroup=true] a[data-amp]').map(link => ({
 			link: link.getAttribute('data-amp'),
@@ -26,6 +39,7 @@ export default async function(searchTerm) {
 
 		return links;
 	} finally {
+		clearTimeout(timeout);
 		browser.destroy();
 	}
 }
